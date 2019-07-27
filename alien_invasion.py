@@ -7,6 +7,7 @@ from pygame.sprite import Group
 from alien  import Alien
 from game_stats import GameStats
 from button import Button
+from ScoreBoard import Scoreboard
 
 
 bullets = Group()
@@ -18,16 +19,17 @@ alien = Alien(ai_settings,screen )
 personazh = Perso(screen,ai_settings)
 gf.create_fleet(ai_settings, screen, aliens,personazh)
 play_button = Button(ai_settings,screen,'Play')
-def run_game(ai_settings, screen, personazh, bullets, aliens,alien,play_button,stats):
+sb = Scoreboard(ai_settings, screen, stats)
+def run_game(ai_settings, screen, personazh, bullets, aliens,alien,play_button,stats,sb):
  # Инициализирует pygame, settings и объект экрана.
 	pygame.init()
 	pygame.display.set_caption("Alien Invasion")
-	gf.check_events(ai_settings, screen, personazh, bullets,stats,play_button,aliens,alien)
-	gf.update_screen(ai_settings, screen, personazh,bullets,aliens,play_button,stats)
+	gf.check_events(ai_settings, screen, personazh, bullets,stats,play_button,aliens,alien,sb)
+	gf.update_screen(ai_settings, screen, personazh,bullets,aliens,play_button,stats,sb)
 	if stats.game_active:
 		personazh.update()
-		gf.update_aliens(ai_settings, stats, screen, personazh, aliens, bullets,alien)
-		gf.update_bullets(ai_settings,screen,personazh,bullets,aliens)
+		gf.update_aliens(ai_settings, stats, screen, personazh, aliens, bullets,alien,sb)
+		gf.update_bullets(ai_settings,screen,personazh,bullets,aliens,sb,stats)
 		
 	
 
@@ -36,6 +38,6 @@ def run_game(ai_settings, screen, personazh, bullets, aliens,alien,play_button,s
 while True:
 # При каждом проходе цикла перерисовывается экран.
 # Отображение последнего прорисованного экрана.
-	run_game(ai_settings, screen, personazh, bullets, aliens,alien,play_button,stats)
+	run_game(ai_settings, screen, personazh, bullets, aliens,alien,play_button,stats,sb)
 	
     

@@ -1,7 +1,9 @@
 import pygame
 import sys
-class Perso:
+from pygame.sprite import Sprite
+class Perso(Sprite):
 	def __init__(self, screen,ai_settings):
+		super(Perso, self).__init__()
 		self.ai_settings = ai_settings
 		self.screen = screen
 		self.image = pygame.image.load('img/rocket.png')
