@@ -25,3 +25,7 @@ class Perso:
 	 		self.rect.y -= self.ai_settings.pers_speed		
 	def blitme(self):
 		self.screen.blit(self.image, self.rect)
+	def center_pers(self):
+		self.center = self.screen_rect.centerx 
+
+			
